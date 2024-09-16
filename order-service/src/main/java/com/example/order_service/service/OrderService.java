@@ -27,7 +27,9 @@ public class OrderService {
     }
 
     public Order addOrder(Order order) {
+
         Product product = productClient.getProductById(order.getProductId());
+
         if (product != null) {
             return orderRepository.save(order);
         } else {

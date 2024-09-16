@@ -16,6 +16,7 @@ public class OrderController {
 
     @GetMapping
     public List<Order> getAllOrders() {
+        System.out.println("test");
         return orderService.getAllOrders();
     }
 

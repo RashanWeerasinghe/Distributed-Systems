@@ -1,5 +1,6 @@
 package com.example.user_service.service.impl;
 
+import com.example.user_service.APIClient;
 import com.example.user_service.dto.DepartmentDto;
 import com.example.user_service.dto.ResponseDto;
 import com.example.user_service.dto.UserDto;
@@ -19,7 +20,9 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 //    private RestTemplate restTemplate;
 
-    private WebClient webClient;
+//    private WebClient webClient;
+
+    private APIClient apiClient;
 
     @Override
     public User saveUser(User user) {
@@ -37,11 +40,14 @@ public class UserServiceImpl implements UserService {
 //                .getForEntity("http://localhost:8080/api/departments/" +user.getDepartmentId()
 //                ,DepartmentDto.class);
 
-        DepartmentDto departmentDto =webClient.get()
-                .uri("http://localhost:8080/api/departments/" + user.getDepartmentId())
-                .retrieve()
-                .bodyToMono(DepartmentDto.class)
-                .block();
+//        DepartmentDto departmentDto =webClient.get()
+//                .uri("http://localhost:8080/api/departments/" + user.getDepartmentId())
+//                .retrieve()
+//                .bodyToMono(DepartmentDto.class)
+//                .block();
+
+
+        DepartmentDto departmentDto = apiClient.getDepartmentById(Long.valueOf(user.getDepartmentId()));
 
         responseDto.setUser(userDto);
         responseDto.setDepartment(departmentDto);
